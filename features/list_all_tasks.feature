@@ -1,6 +1,6 @@
 
 
-feature: list all tasks in the to-do list
+Feature: list all tasks in the to-do list
 
     @list_tasks
     Scenario: List all tasks in the to-do list

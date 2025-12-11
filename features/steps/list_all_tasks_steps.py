@@ -1,11 +1,11 @@
 # features/steps/todo_list_steps.py
 from behave import given, when, then
-from todo_list import ToDoList
+from todo_list import TodoList
 
 @given('the to-do list contains tasks:')
 def step_impl(context):
     # Context table may be: | Task | or | Task | Status |
-    context.todo = ToDoList()
+    context.todo = TodoList()
     for row in context.table:
         # row is a behave.model.TableRow, accessible by column names
         title = row.get("Task") or row.get("task") or None
@@ -20,11 +20,11 @@ def step_impl(context):
 @when('the user lists all tasks')
 def step_impl(context):
     # capture the "output" as multiline string similar to feature expectation
-    lines = context.todo.list_tasks()
+    tasks = context.todo.get_all_tasks()
     # format as in the feature:
     output = "Tasks:\n"
-    for l in lines:
-        output += f" - {l}\n"
+    for task in tasks:
+        output += f" - {task.description}\n"
     context.last_output = output.strip()
     
 @then('the output should contain:')
